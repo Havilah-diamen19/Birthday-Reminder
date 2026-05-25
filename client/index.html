@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Birthday App</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      margin-top: 100px;
+    }
+
+    .box {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+    button {
+      background: black;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <h2>Create User</h2>
+
+    <input id="username" placeholder="Username" />
+    <input id="email" placeholder="Email" />
+    <input id="dob" type="date" />
+
+    <button onclick="submitUser()">Submit</button>
+  </div>
+
+  <script>
+    async function submitUser() {
+      const username = document.getElementById('username').value;
+      const email = document.getElementById('email').value;
+      const dateOfBirth = document.getElementById('dob').value;
+
+      const res = await fetch('http://localhost:4000/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username,
+          email,
+          dateOfBirth
+        })
+      });
+
+      const data = await res.json();
+      console.log(data);
+      alert('User created!');
+    }
+  </script>
+</body>
+</html>
