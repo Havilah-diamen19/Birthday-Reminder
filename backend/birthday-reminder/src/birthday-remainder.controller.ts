@@ -17,6 +17,15 @@ export class BirthdayController {
     private readonly birthdayService: BirthdayService,
   ) {}
 
+  // ✅ HEALTH CHECK
+  @Get('/')
+  healthCheck() {
+    return {
+      success: true,
+      message: 'API is healthy',
+    };
+  }
+
   // ✅ CREATE USER
   @Post('users')
   async createUser(
